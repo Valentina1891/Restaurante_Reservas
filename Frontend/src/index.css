@@ -1,0 +1,162 @@
+/* =========================================================
+   Tema claro para restaurante (fondo blanco sólido)
+   - Paleta cálida con acentos naranja/rojo
+   - Componentes básicos: container, navbar, cards, inputs, botones
+   - Soporte para cards con imagen (catálogo) y grids responsivos
+   ========================================================= */
+
+/* ---------- Variables de tema (fáciles de ajustar) ---------- */
+:root{
+  --bg: #ffffff;           /* Fondo general (sólido blanco) */
+  --surface: #ffffff;      /* Fondo de tarjetas/barras (blanco) */
+  --text: #111827;         /* Texto principal (gris muy oscuro) */
+  --muted: #6b7280;        /* Texto secundario */
+  --brand: #0c0c0b;        /* Acento 1: naranja miel */
+  --brand-2:#0e0c0c;       /* Acento 2: rojo tomate */
+  --danger:#dc2626;        /* Para mensajes de error/botón peligro */
+  --ok:#16a34a;            /* Para mensajes de éxito */
+  --radius: 16px;          /* Redondeo global de bordes */
+  --shadow: 0 10px 22px rgba(0,0,0,.08); /* Sombra suave para tarjetas */
+}
+
+/* ---------- Reseteo mínimo y base tipográfica ---------- */
+*{ box-sizing: border-box; }
+html,body,#root{ height:100%; }
+
+body{
+  margin:0;
+  background: var(--bg);          /* ← fondo blanco sólido */
+  color:var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+  line-height: 1.35;
+}
+
+/* ---------- Contenedor centrado y responsivo ---------- */
+.container{
+  max-width: 1000px; /* ancho máximo legible */
+  margin: 0 auto;    /* centra horizontalmente */
+  padding: 20px;     /* respiración lateral */
+}
+
+/* ---------- Barra superior (nav) ---------- */
+.nav{
+  display:flex; gap:14px; align-items:center; padding:12px 16px;
+  background: #fff;                               /* barra blanca */
+  border-bottom: 1px solid rgba(0,0,0,.06);       /* línea sutil */
+  position: sticky; top:0; z-index: 10;           /* fija arriba */
+}
+.nav a, .nav button{
+  color:var(--text); text-decoration:none; font-weight:600;
+  background: transparent; border:0; cursor:pointer;
+  padding:8px 10px; border-radius:10px;
+}
+.nav a:hover, .nav button:hover{
+  background: rgba(0,0,0,.05);                    /* hover suave */
+}
+
+/* ---------- Tarjeta genérica (contenedores visuales) ---------- */
+.card{
+  background: var(--surface);                     /* blanco */
+  border:1px solid rgba(0,0,0,.06);               /* borde sutil */
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding:22px;
+}
+
+/* ---------- Inputs y selects ---------- */
+.input, .select{
+  width:100%;
+  background:#fff;                                /* campos claros */
+  color:var(--text);
+  border:1px solid rgba(0,0,0,.10);
+  padding:12px 14px; border-radius:12px; outline:none;
+}
+.input:focus, .select:focus{
+  border-color: var(--brand);                     /* acento al foco */
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 25%, transparent);
+}
+
+/* ---------- Botones ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2)); /* degradé cálido */
+  color:#fff; font-weight:800; border:0; padding:12px 16px; border-radius:12px; cursor:pointer;
+}
+.btn.secondary{ background: rgba(0,0,0,.06); color: var(--text); }
+.btn.danger{ background: var(--danger); color:white; }
+.btn:disabled{ opacity:.6; cursor:not-allowed; }
+
+/* ---------- Títulos y texto auxiliar ---------- */
+.h1{ font-size: clamp(22px, 2vw + 14px, 34px); margin: 8px 0 12px; }
+.h2{ font-size: 22px; margin: 0 0 8px; color:#1f2937; }  /* un poco más oscuro en claro */
+.muted{ color: var(--muted); }
+
+/* ---------- Listas “neutras” ---------- */
+.list{ display:grid; gap:10px; margin: 12px 0; padding:0; list-style:none; }
+.item{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:12px; border:1px solid rgba(0,0,0,.08); border-radius:12px; background:#fff;
+}
+
+/* ---------- Layout de columnas (responsive) ---------- */
+.grid{ display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+.form{ display:grid; gap:10px; }
+
+/* ---------- Links (color acorde al tema claro) ---------- */
+a { color: #030303; text-decoration: none; }   /* rojo tomate */
+a:hover { text-decoration: underline; }
+
+/* =========================================================
+   Cards con imagen (para catálogos/menú)
+   - .card.media: tarjeta que reserva un alto para la imagen
+   - .card-img: imagen con cover
+   - .card-body: contenedor del texto
+   - .price: estilo de precio
+   - .grid.cards: grilla para catálogo
+   ========================================================= */
+.card.media{
+  padding: 0; overflow: hidden;
+  display: grid; grid-template-rows: 180px auto;  /* fila imagen + fila contenido */
+}
+.card .card-img{
+  width: 100%; height: 100%; object-fit: cover;   /* recorte uniforme */
+  background: #f3f4f6;                            /* color de carga */
+}
+.card .card-body{ padding: 16px 18px 18px; }
+.card .price{
+  font-weight: 900; margin: 8px 0;
+  color: var(--brand-2);                           /* resalta precio */
+}
+
+/* Grilla específica para catálogo (cards con imagen) */
+.grid.cards{
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.footer-fixed {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  background: var(--surface, #fff);
+  border-top: 1px solid rgba(0,0,0,.06);
+  padding: 12px 20px;
+  z-index: 20;
+}
+
+/* Para que el contenido no quede tapado por el footer fijo:
+   ajusta este valor al alto real del footer */
+.pad-for-footer {
+  padding-bottom: 56px; /* ≈ alto del footer */
+}
+/* Centra la tarjeta de login/registro verticalmente */
+.auth-wrap{
+  min-height: calc(100vh - 160px); /* resta la altura aprox. de navbar+footer */
+  display: grid;
+  place-items: center;
+}
+
+/* Achica el card en pantallas grandes para que no quede "perdido" */
+.auth-wrap .card{
+  width: min(460px, 94vw);
+}
+
+/* Ajustes de inputs en auth (opcional) */
+.auth-wrap .input::placeholder{ opacity:.6; }

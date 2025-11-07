@@ -1,0 +1,7 @@
+.env/
+node_modules/
+
+# envs
+.env
+.env.*
+!.env.example
