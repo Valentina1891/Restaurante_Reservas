@@ -23,3 +23,4 @@ CSS3 – estilos personalizados
 Bootstrap 5 – diseño responsive y componentes
 
 JavaScript – funciones simples (año dinámico y envío de reservas demo)
+React Vite - Vistas simples 
