@@ -147,16 +147,44 @@ a:hover { text-decoration: underline; }
   padding-bottom: 56px; /* ≈ alto del footer */
 }
 /* Centra la tarjeta de login/registro verticalmente */
+/* Centra el card de auth en pantalla */
 .auth-wrap{
-  min-height: calc(100vh - 160px); /* resta la altura aprox. de navbar+footer */
+  min-height: calc(100vh - 160px); /* ajusta si tu navbar/footer cambian */
   display: grid;
   place-items: center;
 }
 
-/* Achica el card en pantallas grandes para que no quede "perdido" */
+/* Anchura cómoda en desktops y responsivo en móvil */
 .auth-wrap .card{
   width: min(460px, 94vw);
 }
 
-/* Ajustes de inputs en auth (opcional) */
+/* Pequeño toque al placeholder */
 .auth-wrap .input::placeholder{ opacity:.6; }
+/* Contenedor relativo para meter el botón dentro del input */
+.field-password { position: relative; }
+
+/* Deja espacio a la derecha para el botón ojo */
+.field-password .input { padding-right: 44px; }
+
+/* Botón ojo, tamaño fijo y sin romper el layout */
+.toggle-eye{
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  padding: 6px 8px;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  /* evita que textos raros se desborden */
+  min-width: 32px;
+  max-width: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Accesibilidad al enfocar */
+.toggle-eye:focus { outline: 2px solid var(--brand); outline-offset: 2px; }
