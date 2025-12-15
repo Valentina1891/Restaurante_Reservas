@@ -30,7 +30,7 @@ export default function Home() {
     (async () => {
       try {
         // 👇 importante: el backend filtra con ?destacados=true (no "destacado")
-        const { data } = await api.get("/api/menu", {
+        const { data } = await api.get("/menu", {
           params: { destacado: true, limit: 6 },
         });
         const urls = (data.items || [])

@@ -1,6 +1,8 @@
+// src/lib/api.js
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API, // debe ser http://localhost:4000
-  withCredentials: true,             // envía cookie httpOnly
+  baseURL: "/api",          // usamos proxy de Vite en dev
+  withCredentials: true,    // cookies httpOnly
+  headers: { "Content-Type": "application/json" },
 });

@@ -27,7 +27,7 @@ export default function Register(){
       return;
     }
     try{
-      await api.post("/api/auth/register", form);
+      await api.post("/auth/register", form);
       setOk("Cuenta creada. Ahora puedes ingresar.");
       // Tip: si prefieres auto-login, llama a /auth/login y redirige directo
       setTimeout(()=> nav("/login"), 800);
