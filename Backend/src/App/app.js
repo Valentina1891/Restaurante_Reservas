@@ -15,7 +15,10 @@ const morgan = require("morgan");
 //coockies
 const cookieParser = require("cookie-parser");
 // para usar npm dev run jsjs
-require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 
 // Routers
 const router = require("../Routers/Routes");  // rutas públicas/mixtas
