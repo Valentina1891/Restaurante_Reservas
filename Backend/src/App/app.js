@@ -35,18 +35,25 @@ app.use(express.json());         // parsea JSON del body
 app.use(morgan("dev"));          // logs de peticiones
 app.use(cookieParser());         // habilita req.cookies
 
-/**
- * CORS con credenciales:
- * - origin: el dominio del frontend (React/Vite/Next) que consumirá el backend
- * - credentials: true para permitir enviar/recibir cookies
- *
- * IMPORTANTE:
- *  - FRONTEND_URL debe ser algo como:
- *      http://localhost:5173   (Vite)
- *      http://localhost:3000   (Next/CRA)
- *  - En fetch/axios del front SIEMPRE usar credentials: "include"
- */
-app.use(cors());
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  // agrega aquí tu dominio cuando publiques el front:
+  // "https://tu-front.netlify.app",
+];
+
+app.use(cors({
+  origin: function (origin, cb) {
+    // permite requests sin origin (Postman, Render healthchecks, etc.)
+    if (!origin) return cb(null, true);
+
+    if (allowedOrigins.includes(origin)) return cb(null, true);
+    return cb(new Error("Not allowed by CORS"));
+  },
+  credentials: true,
+}));
+
 
 // ---------- Rutas ----------
 /**
