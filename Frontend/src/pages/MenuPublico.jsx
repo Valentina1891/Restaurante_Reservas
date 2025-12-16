@@ -14,7 +14,7 @@ export default function MenuPublico(){
   const [q, setQ] = useState("");
 
   const load = async (params={}) => {
-    const { data } = await api.get("/api/menu", { params });
+    const { data } = await api.get("/menu", { params });
     setItems(data.items || []);
   };
 

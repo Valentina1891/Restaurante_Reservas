@@ -49,7 +49,7 @@ export default function MisReservas() {
   const crear = async () => {
     try {
       setErr("");
-      await api.post("/api/reservas", form);
+      await api.post("/reservas", form);
       setForm({ fecha: "", hora: "", personas: 2, notas: "" });
       load();
     } catch (e) {
@@ -61,7 +61,7 @@ export default function MisReservas() {
   const cancelar = async (id) => {
     try {
       setErr("");
-      await api.post(`/api/reservas/${id}/cancelar`);
+      await api.post(`/reservas/${id}/cancelar`);
       // si estabas editando la misma, sal del modo edición
       if (editing === id) cancelEdit();
       load();
@@ -93,7 +93,7 @@ export default function MisReservas() {
       setErr("");
       const { _id, ...payload } = buffer;
       if (payload.personas != null) payload.personas = Number(payload.personas);
-      await api.put(`/api/reservas/${editing}`, payload);
+      await api.put(`/reservas/${editing}`, payload);
       cancelEdit();
       load();
     } catch (e) {

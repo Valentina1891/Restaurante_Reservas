@@ -38,7 +38,7 @@ export default function AdminReservas() {
     try {
       setLoading(true);
       setErr("");
-      const { data } = await api.get("/api/admin/reservas", { params: filtros });
+      const { data } = await api.get("/admin/reservas", { params: filtros });
       setItems(data.items || []);
       // al cambiar el dataset, vuelve a la página 1
       setPage(1);
@@ -52,7 +52,7 @@ export default function AdminReservas() {
   // Carga capacidad por slot (personas/reservas por {fecha,hora})
   const loadCap = async () => {
     try {
-      const { data } = await api.get("/api/admin/reservas/capacidad", {
+      const { data } = await api.get("/admin/reservas/capacidad", {
         params: { fecha: filtros.fecha || undefined },
       });
       setCapacidad(data.items || []);

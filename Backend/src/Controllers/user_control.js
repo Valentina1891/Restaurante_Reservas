@@ -15,13 +15,16 @@ const JWT_SECRET = process.env.JWT_SECRET || "dev_secret";
  * - path: '/' la cookie aplica a toda la app
  * - maxAge: expira en 1 hora
  */
+const isProd = process.env.NODE_ENV === "production";
+
 const COOKIE_OPTS = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production", // en localhost debe ser false
-  sameSite: "lax",
+  secure: isProd,                    // true en Render (https)
+  sameSite: isProd ? "none" : "lax",  // 👈 clave
   path: "/",
-  maxAge: 1000 * 60 * 60, // 1h
+  maxAge: 1000 * 60 * 60,
 };
+
 
 /* ======================== REGISTER ======================== */
 /**
@@ -151,9 +154,15 @@ const login = async (req, res, next) => {
  * - Borra la cookie 'access_token' enviando una cookie vacía con el mismo path
  */
 const logout = (req, res) => {
-  res.clearCookie("access_token", { path: "/" });
+  const isProd = process.env.NODE_ENV === "production";
+  res.clearCookie("access_token", {
+    path: "/",
+    secure: isProd,
+    sameSite: isProd ? "none" : "lax",
+  });
   return res.status(200).json({ msg: "Logout ok" });
 };
+
 
 // Exportamos handlers para usarlos en las rutas
 module.exports = { register, login, logout };
