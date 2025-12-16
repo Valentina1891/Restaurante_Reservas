@@ -39,6 +39,7 @@ app.use(cookieParser());         // habilita req.cookies
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
+  "https://valentina1891.github.io"
   // agrega aquí tu dominio cuando publiques el front:
   // "https://tu-front.netlify.app",
 ];
