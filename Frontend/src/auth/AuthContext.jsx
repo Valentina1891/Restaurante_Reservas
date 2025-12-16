@@ -1,4 +1,4 @@
-// src/context/AuthContext.jsx (o .js)
+// src/context/AuthContext.jsx
 import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../lib/api";
 
@@ -24,16 +24,25 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (correo, password) => {
-    await api.post("/auth/login", { correo, password }); // setea cookie en back
+    await api.post("/auth/login", { correo, password });
     const { data } = await api.get("/auth/me");
     setUser(data.user);
   };
 
   const logout = async () => {
-    await api.post("/auth/logout"); // limpia cookie en back
+    await api.post("/auth/logout");
     setUser(null);
   };
 
-  return <AuthCtx.Provider value={{ user, loading, login, logout }}>{children}</AuthCtx.Provider>;
+  return (
+    <AuthCtx.Provider value={{ user, loading, login, logout }}>
+      {children}
+    </AuthCtx.Provider>
+  );
 }
-export const useAuth = () => useContext(AuthCtx);
+
+export function useAuth() {
+  const ctx = useContext(AuthCtx);
+  if (!ctx) throw new Error("useAuth debe usarse dentro de <AuthProvider>");
+  return ctx;
+}

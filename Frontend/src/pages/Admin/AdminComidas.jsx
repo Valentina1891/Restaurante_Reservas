@@ -49,7 +49,7 @@ export default function AdminComidas() {
   const load = async () => {
     try {
       setLoading(true);
-      const { data } = await api.get("/api/admin/comidas");
+      const { data } = await api.get("/admin/comidas");
       // backend puede devolver {items: [...] } o directamente [...]
       setItems(data.items || data || []);
       setErr("");
@@ -89,7 +89,7 @@ export default function AdminComidas() {
       if (!Number.isFinite(payload.precio) || payload.precio <= 0)
         return setErr("El precio debe ser un número mayor a 0.");
 
-      await api.post("/api/admin/comidas", payload);
+      await api.post("/admin/comidas", payload);
 
       // Limpia el form y recarga
       setForm({
@@ -125,7 +125,7 @@ export default function AdminComidas() {
   const saveEdit = async () => {
     try {
       const payload = toPayload(buffer);
-      await api.put(`/api/admin/comidas/${editing}`, payload);
+      await api.put(`/admin/comidas/${editing}`, payload);
       cancelEdit();
       load();
     } catch (e) {
@@ -137,7 +137,7 @@ export default function AdminComidas() {
   const remove = async (id) => {
     if (!confirm("¿Eliminar este plato?")) return;
     try {
-      await api.delete(`/api/admin/comidas/${id}`);
+      await api.delete(`/admin/comidas/${id}`);
       load();
     } catch (e) {
       setErr(e?.response?.data?.msg || "No se pudo eliminar el plato.");

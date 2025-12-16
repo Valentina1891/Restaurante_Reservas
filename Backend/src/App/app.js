@@ -46,12 +46,7 @@ app.use(cookieParser());         // habilita req.cookies
  *      http://localhost:3000   (Next/CRA)
  *  - En fetch/axios del front SIEMPRE usar credentials: "include"
  */
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
-    credentials: true,
-  })
-);
+app.use(cors());
 
 // ---------- Rutas ----------
 /**
